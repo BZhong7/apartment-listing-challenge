@@ -24,8 +24,14 @@ public class ListingController {
     @PostMapping
     public ResponseEntity<Listing> createListing(@Valid @RequestBody CreateListingRequestDto listingDto) {
         // TODO: Complete this
+        Listing listing = new Listing();
+        listing.setId(listingDto.getId());
+        listing.setAddress(listingDto.getAddress());
+        listing.setBeds(listingDto.getBeds());
+        listing.setBaths(listingDto.getBaths());
+        listing.setPrice(listingDto.getPrice());
 
-        Listing createdListing = listingDto.addListing();
+        Listing createdListing = listing;
         return new ResponseEntity<>(
                 createdListing,
                 HttpStatus.CREATED);
