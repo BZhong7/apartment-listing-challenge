@@ -25,14 +25,14 @@ public class ListingController {
         this.listingService = listingService;
     }
 
+    //Extract data from DTO and put it in a Listing object. Add it to ListingRepository when complete.
     @PostMapping
     public ResponseEntity<Listing> createListing(@Valid @RequestBody CreateListingRequestDto listingDto) {
-        // TODO: Complete this
         Listing listing = new Listing();
 
         //Get the current time, convert it into a string, then add it to listing
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"); //ISO 8601 format
         String formattedDateTime = currentDateTime.format(formatter);
 
         listing.setAddress(listingDto.getAddress());
@@ -56,6 +56,7 @@ public class ListingController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    //Returns a list of listings
     @GetMapping(path="/everylisting")
     @ResponseBody
     public Collection<Listing> getAllListings() {

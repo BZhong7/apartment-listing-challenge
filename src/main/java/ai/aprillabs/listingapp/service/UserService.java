@@ -1,7 +1,6 @@
 package ai.aprillabs.listingapp.service;
 
 import ai.aprillabs.listingapp.domain.User;
-import ai.aprillabs.listingapp.domain.UserType;
 import ai.aprillabs.listingapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
