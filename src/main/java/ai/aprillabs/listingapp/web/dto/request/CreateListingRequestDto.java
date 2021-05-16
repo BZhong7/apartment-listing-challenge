@@ -5,11 +5,15 @@ import java.math.BigDecimal;
 
 public class CreateListingRequestDto {
 
+    private Integer id;
     private String address;
     private Integer beds;
     private Integer baths;
     private BigDecimal price;
 
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) { this.id = id; }
 
     public String getAddress() {
         return address;

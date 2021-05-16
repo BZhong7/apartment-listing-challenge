@@ -32,7 +32,7 @@ public class ListingController {
 
         //Get the current time, convert it into a string, then add it to listing
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
         String formattedDateTime = currentDateTime.format(formatter);
 
         listing.setAddress(listingDto.getAddress());
@@ -62,5 +62,15 @@ public class ListingController {
         List<Listing> everyListing = listingService.getAllListings();
 
         return everyListing;
+    }
+
+    @PostMapping(path="/delete")
+    public ResponseEntity deleteListing(@Valid @RequestBody CreateListingRequestDto listingRequestDto) {
+        try {
+            listingService.deleteListing(listingRequestDto.getId());
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

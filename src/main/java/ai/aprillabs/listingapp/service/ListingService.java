@@ -27,4 +27,6 @@ public class ListingService {
     }
 
     public List<Listing> getAllListings() { return (List<Listing>) listingRepository.findAll(); }
+
+    public void deleteListing(Integer id) { listingRepository.deleteById(id); }
 }
