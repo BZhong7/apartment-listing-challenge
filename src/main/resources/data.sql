@@ -15,5 +15,5 @@ CREATE TABLE user (
   name VARCHAR(250) NOT NULL,
   type VARCHAR(250),
   age TINYINT,
-  numOfReferral TINYINT
+  num_of_referral TINYINT
 );

@@ -18,6 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public User createUser(User user) { return userRepository.save(user); }
+
+    public Optional<User> getUser(Integer id) { return userRepository.findById(id); }
+
     public Integer getDiscountRateForUser(Integer id) {
         Optional<User> userOpt = userRepository.findById(id);
         if (userOpt.isEmpty()) {
