@@ -9,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping(path="/listings")
@@ -25,13 +29,19 @@ public class ListingController {
     public ResponseEntity<Listing> createListing(@Valid @RequestBody CreateListingRequestDto listingDto) {
         // TODO: Complete this
         Listing listing = new Listing();
-        listing.setId(listingDto.getId());
+
+        //Get the current time, convert it into a string, then add it to listing
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+
         listing.setAddress(listingDto.getAddress());
         listing.setBeds(listingDto.getBeds());
         listing.setBaths(listingDto.getBaths());
         listing.setPrice(listingDto.getPrice());
+        listing.setCreatedAt(formattedDateTime);
 
-        Listing createdListing = listing;
+        Listing createdListing = listingService.createListing(listing);
         return new ResponseEntity<>(
                 createdListing,
                 HttpStatus.CREATED);
@@ -44,5 +54,13 @@ public class ListingController {
                         listing,
                         HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping(path="/everylisting")
+    @ResponseBody
+    public Collection<Listing> getAllListings() {
+        List<Listing> everyListing = listingService.getAllListings();
+
+        return everyListing;
     }
 }

@@ -5,6 +5,7 @@ import ai.aprillabs.listingapp.repository.ListingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,4 +25,6 @@ public class ListingService {
     public Optional<Listing> getListing(Integer id) {
         return listingRepository.findById(id);
     }
+
+    public List<Listing> getAllListings() { return (List<Listing>) listingRepository.findAll(); }
 }

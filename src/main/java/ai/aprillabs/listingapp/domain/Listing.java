@@ -16,6 +16,7 @@ public class Listing {
     private Integer beds;
     private Integer baths;
     private BigDecimal price;
+    private String createdAt;
 
     public Listing() {
     }
@@ -27,6 +28,7 @@ public class Listing {
         this.baths = baths;
         this.price = price;
     }
+
 
     public Integer getId() {
         return id;
@@ -67,4 +69,8 @@ public class Listing {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public String getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 }

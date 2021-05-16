@@ -6,7 +6,8 @@ CREATE TABLE listing (
   address VARCHAR(250) NOT NULL,
   beds TINYINT,
   baths TINYINT,
-  price DECIMAL(10,2)
+  price DECIMAL(10,2),
+  created_at VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE user (
