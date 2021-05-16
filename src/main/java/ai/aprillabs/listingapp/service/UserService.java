@@ -29,39 +29,32 @@ public class UserService {
         }
         User user = userOpt.get();
 
-        if (UserType.CONTRACTOR.equals(user.getType())) {
-            if (user.getAge() < 25) {
-                if (user.getNumOfReferral() > 10) {
-                    return 20;
-                } else {
+        switch (user.getType()) {
+            case CONTRACTOR:
+            case PARTNER:
+                return calcDiscountBasedOnReferrals(user);
+            case AGENT:
+                if (user.getAge() < 25) {
                     return 10;
-                }
-            } else {
-                return 5;
-            }
-        } else if (UserType.PARTNER.equals(user.getType())) {
-            if (user.getAge() < 25) {
-                if (user.getNumOfReferral() > 10) {
-                    return 20;
                 } else {
-                    return 10;
+                    return 20;
                 }
-            } else {
-                return 5;
-            }
-        }
-        else if (UserType.AGENT.equals(user.getType())) {
-            if (user.getAge() < 25) {
-                return 10;
-            } else {
-                return 20;
-            }
-        } else if (UserType.LANDLORD.equals(user.getType())) {
-            return 30;
-        } else if (UserType.BROKER.equals(user.getType())) {
-            return 40;
-        }
+            case LANDLORD: return 30;
+            case BROKER: return 40;
 
-        return 0;
+            default: return 0;
+        }
+    }
+
+    private Integer calcDiscountBasedOnReferrals(User user) {
+        if (user.getAge() < 25) {
+            if (user.getNumOfReferral() > 10) {
+                return 20;
+            } else {
+                return 10;
+            }
+        } else {
+            return 5;
+        }
     }
 }
